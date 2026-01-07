@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: streamlit-app
   labels:
-    app: Ruby's Streamlit
+    app: Streamlit
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: Ruby's Streamlit
+      app: Streamlit
   template:
     metadata:
       labels:
-        app: Ruby's Streamlit
+        app: Streamlit
     spec:
       containers:
         - name: streamlit-container
@@ -31,7 +31,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: Ruby's Streamlit
+    app: Streamlit
   ports:
     - protocol: TCP
       port: 80
