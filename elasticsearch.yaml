@@ -26,8 +26,7 @@ spec:
       labels:
         app: elasticsearch
     spec:
-      # Fix for Cgroup v2 and Memory issues: 
-      # This initContainer sets the host's virtual memory limits correctly.
+      # Fix for Cgroup v2: This initContainer sets host virtual memory correctly
       initContainers:
       - name: set-vm-max-map-count
         image: busybox:1.28
@@ -56,8 +55,7 @@ spec:
               memory: "1Gi"
               cpu: "500m"
           securityContext:
-            # Privileged mode allows Java to see the host's Cgroup filesystem
-            # which fixes the 'anyController is null' error.
+            # Privileged mode allows Java to bypass the Cgroup detection error
             privileged: true
             runAsUser: 1000
           volumeMounts:
