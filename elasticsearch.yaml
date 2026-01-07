@@ -26,7 +26,7 @@ spec:
       labels:
         app: elasticsearch
     spec:
-      # Fix for Cgroup v2: This initContainer sets host virtual memory correctly
+      # Fix for Cgroup v2: initContainer tunes the host's memory map limits
       initContainers:
       - name: set-vm-max-map-count
         image: busybox:1.28
@@ -55,8 +55,8 @@ spec:
               memory: "1Gi"
               cpu: "500m"
           securityContext:
-            # Privileged mode allows Java to bypass the Cgroup detection error
-            privileged: true
+            # Privileged mode allows Java 17 to correctly read Cgroup V2 mounts
+            privileged: true 
             runAsUser: 1000
           volumeMounts:
             - mountPath: /usr/share/elasticsearch/data
